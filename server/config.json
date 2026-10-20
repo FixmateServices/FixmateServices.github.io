@@ -1,0 +1,110 @@
+{
+  "_readme": [
+    "FixMate booking settings. THIS FILE IS THE ONLY PLACE BUSINESS RULES LIVE.",
+    "Edit it, then restart the server. Nothing here is hard-coded in the code.",
+    "",
+    "!! EVERYTHING MARKED confirm_before_launch:true IS A PLACEHOLDER !!",
+    "The values were NOT chosen by FixMate Services. They are examples so the",
+    "system can run at all. Opening the site for real bookings before you",
+    "correct them will show customers the wrong times. Fix these first.",
+    "",
+    "opening_closed_until_YYYY_MM_DD is a safety switch: while the current date",
+    "is before that value the server refuses every booking request, so you can",
+    "set this up without accidentally taking real bookings. It is currently set",
+    "far in the future, so booking is CLOSED. When the hours below are correct,",
+    "change it to a date in the past to open."
+  ],
+
+  "opening_closed_until_YYYY_MM_DD": "2030-01-01",
+  "confirm_before_launch": true,
+
+  "timezone": "Europe/London",
+  "locale": "en-GB",
+
+  "appointment_duration_minutes": 60,
+  "confirm_before_launch_duration": true,
+
+  "slot_granularity_minutes": 30,
+  "confirm_before_launch_granularity": true,
+
+  "_buffers_readme": [
+    "Edge buffers, not gaps between jobs.",
+    "buffer_before_minutes: time held back at the START of each day, so the",
+    "  first customer cannot start before working_hours start + this.",
+    "buffer_after_minutes: time held back at the END of each day, so the last",
+    "  job must finish by working_hours end - this."
+  ],
+  "buffer_before_minutes": 0,
+  "buffer_after_minutes": 0,
+
+  "min_notice_hours": 12,
+  "confirm_before_launch_min_notice": true,
+
+  "max_advance_days": 60,
+  "booking_horizon_days": 60,
+
+  "busy_statuses": ["Pending", "Confirmed"],
+
+  "show_booked_slots": false,
+
+  "closures": [],
+  "holidays": ["2026-01-01", "2026-12-25", "2026-12-26"],
+
+  "working_hours": {
+    "_readme": [
+      "PLACEHOLDER EXAMPLE ONLY - confirm your real hours before launch.",
+      "Key = weekday. Values = one or more windows as [start, end] in 24h HH:MM.",
+      "A weekday that is absent or set to [] is closed.",
+      "Multiple windows per day is how you express breaks, e.g. lunch.",
+      "Keys: mon, tue, wed, thu, fri, sat, sun"
+    ],
+    "mon": [["09:00", "12:00"], ["13:00", "17:00"]],
+    "tue": [["09:00", "12:00"], ["13:00", "17:00"]],
+    "wed": [["09:00", "12:00"], ["13:00", "17:00"]],
+    "thu": [["09:00", "12:00"], ["13:00", "17:00"]],
+    "fri": [["09:00", "12:00"], ["13:00", "17:00"]],
+    "sat": [],
+    "sun": []
+  },
+
+  "service_types_readme": [
+    "Allowed Type of Service values, stored as ids that match the service",
+    "group ids in data.js. Edit freely. An unknown id here is rejected by the",
+    "server, so the booking form can only ever offer services you listed."
+  ],
+  "service_types": [
+    "property-maintenance",
+    "carpentry-woodwork",
+    "carpentry-door-repairs",
+    "door-fitting-adjustments",
+    "door-lock-installation-replacement",
+    "locks-security",
+    "tiling-bathroom-work",
+    "basic-plumbing-sink-installation",
+    "basic-electrical-cable-work",
+    "painting-decorating",
+    "painting-preparation-renovation-support",
+    "furniture-assembly",
+    "shelving-cabinet-installation",
+    "curtain-pole-installation",
+    "silicone-sealing-finishing",
+    "general-repairs-diy",
+    "kitchen-bathroom-maintenance",
+    "cabinets-shelves",
+    "renovation-refurbishment-support",
+    "larger-property-maintenance-works"
+  ],
+
+  "admin": {
+    "session_ttl_hours": 12,
+    "username": "admin"
+  },
+
+  "notify": {
+    "_readme": "n8n / Google Sheets copy. Runs AFTER the database save succeeds.",
+    "enabled": false,
+    "webhook_url_env": "N8N_BOOKING_WEBHOOK_URL",
+    "secret_env": "N8N_WEBHOOK_SECRET",
+    "timeout_seconds": 8
+  }
+}
